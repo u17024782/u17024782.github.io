@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GIS 709 Assignment </title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="./css/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/leaflet.zoomdisplay.css"/>
+    <link rel="stylesheet" href="./css/leaflet.wmslegend.css"/>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/opencagedata/leaflet-opencage-search@1.3.0/dist/css/L.Control.OpenCageData.Search.min.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+      <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&sensor=false"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+      <script src="./Leaflet.draw popup event example_files/leaflet-src.js"></script>
+      <link rel="stylesheet" href="./Leaflet.draw popup event example_files/leaflet.css">
+
+
+      <link rel="stylesheet" href="./leaflet.css">
+      <link rel="stylesheet" href="./leaflet-search.css">
+      <link rel="stylesheet" href="./style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.js">
+      <link
+              rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
+          />
+    <style>
+        .map {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+            background: white;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+    <div id="map" class="map"></div>
+    <script src="./js/leaflet.zoomdisplay.js"></script>
+    <script src="./js/leaflet.wmslegend.js"></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="./js/leaflet-routing-machine.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="./js/L.TileLayer.BetterWMS.js"></script>
+    <script src="./js/L.Control.OpenCageSearch.min.js"></script>
+
+
+    <script type="text/javascript" async="" src="./simpsearch_files/ga.js"></script><script src="./leaflet.js"></script>
+    <script src="./leaflet-search.js"></script>
+    <script src="http://leaflet.github.io/Leaflet.draw/leaflet.draw.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js">
+        </script>
+    <script>
+    var data = [
+      {"loc":[-34.10568,23.395192], "title":"Nelson Bay Cave"},
+      {"loc":[-29.720058,28.762499], "title":"Sehonghong Cave"},
+      {"loc":[-33.37470,25.804642], "title":"Melkhoutboom Cave"},
+      {"loc":[-33.362791,22.173105], "title":"Boomplaas Cave"},
+      {"loc":[-32.172956,18.590058], "title":"Faraoskop Rock Shelter"},
+      {"loc":[-32.317605,18.317423], "title":"Elands Bay Cave"},
+      {"loc":[-29.701663,30.717741], "title":"Umhlatuzana Shelter Cave"},
+      {"loc":[-29.210045,27.51373], "title":"Rose Cottage Cave"},
+      {"loc":[-28.38657,23.547722], "title":"Dikbosch Cave"},
+      {"loc":[-34.567428,19.445918], "title":"Byneskranskop Cave"},
+      {"loc":[-24.562992,30.611334], "title":"Bushman Rock Shelter"}
+
+    ];
+
+
+     //Add map and center it, create a bounding box for pretoria
+     var map = L.map('map', {
+        center: [-22.9375, 30.5595],
+        zoom: 2,
+        minZoom: 1,
+        maxZoom: 20,
+        drawControl: true,
+        opacity: 0.5,
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: 'topleft'
+        }
+    });
+
+ //add variable options for geocoder
+var options = {
+	key: '7444533504004fdda95d64654170e03b',
+	limit: 5,
+	proximity: '-22.9375, 30.5595',
+	position: 'topleft'
+
+};
+
+//Add geocoder control to top left of screen
+
+
+
+
+
+
+
+
+
+var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        map.addControl(drawControl);
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+            drawnItems.addLayer(layer);
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Tuks Logo to Top Right
+    var logo = L.control({position: 'topright'});
+    logo.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'logo');
+        div.innerHTML = "<a><img src='/Users/Andy/Downloads/GIS 709 Exam Project/UP.png' width=\"100px\" height=\"80px\"></a>";
+        return div;
+    };
+    logo.addTo(map);
+
+// Bottom Text
+    var info = L.control({position: 'bottomright'});
+    info.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info');
+        div.innerHTML = "<span>Robberg Technocomplex <a >GIS 709 Assignment </a></span> " +
+            "<a ><img style='vertical-align:middle' src='/Users/Andy/Downloads/GIS 709 Exam Project/UP.png' height='20px'/></a>"
+        return div;
+    };
+    info.addTo(map);
+
+
+//Base map
+var basemap= L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+ //reverse geocode on map click
+var geocoder = L.Control.OpenCageSearch.geocoder(options);
+var marker;
+map.on('click', function(e) {
+  var query = e.latlng.lat.toString() + ',' + e.latlng.lng.toString();
+  geocoder.geocode(query, function(results) {
+    var res = results[0];
+    if (res) {
+      if (marker) {
+        marker.setLatLng(res.center).setPopupContent(res.name).openPopup();
+      } else {
+        marker = L.marker(res.center, {icon: redIcon}).bindPopup(res.name).addTo(map).openPopup();
+      }
+    }
+  })
+})
+
+//Add routing control
+L.Routing.control({
+    waypoints: [
+        L.latLng(-25.7479,28.2293), //input location
+        L.latLng(-34.10568,20.395192) //draw from results of geocoder
+    ],
+    routeWhileDragging: true,
+}).addTo(map);
+
+
+var Caves = new L.TileLayer.WMS('http://161.35.16.131:8080/geoserver/pro/wms?', {
+  layers: 'pro:caves_process',
+  format: 'image/png',
+  transparent: true,
+  version: '1.3.0'
+
+}).addTo(map);
+
+var base=
+{
+"basemap":basemap,
+"Caves": Caves,
+
+};
+var cave = {
+
+
+};
+
+L.control.layers(cave,base).addTo(map);
+
+
+
+//Add shop layer
+
+
+// specify popup options
+
+var markersLayer = new L.LayerGroup();	//layer contain searched elements
+
+map.addLayer(markersLayer);
+
+var controlSearch = new L.Control.Search({
+  position:'topleft',
+  layer: markersLayer,
+  initial: false,
+  zoom: 12,
+  marker: false
+});
+
+map.addControl( controlSearch );
+
+////////////populate map with markers from sample data
+for(i in data) {
+  var title = data[i].title,	//value searched
+    loc = data[i].loc,		//position found
+    marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
+  marker.bindPopup('title: '+ title );
+  markersLayer.addLayer(marker);
+}
+
+
+
+    </script>
+
+
+
+</body>
+</html>
